@@ -1,7 +1,10 @@
 package org.denivip.osmf.plugins
 {
 	import org.denivip.osmf.elements.M3U8Loader;
+	import org.denivip.osmf.logging.HLSLoggerFactory;
+	import org.denivip.osmf.logging.LogHandler;
 	import org.osmf.elements.LoadFromDocumentElement;
+	import org.osmf.logging.Log;
 	import org.osmf.media.MediaElement;
 	import org.osmf.media.MediaFactoryItem;
 	import org.osmf.media.MediaFactoryItemType;
@@ -22,6 +25,14 @@ package org.denivip.osmf.plugins
 					MediaFactoryItemType.STANDARD
 				)
 			);
+			
+			CONFIG::LOGGING
+			{
+				var handlers:Vector.<LogHandler> = new Vector.<LogHandler>;
+				handlers.push(null);
+				
+				Log.loggerFactory = new HLSLoggerFactory(handlers);
+			}
 			
 			super(items, elementCreationNotifFunc);
 		}
